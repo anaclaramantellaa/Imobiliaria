@@ -1,9 +1,14 @@
 const express = require('express');
+require('dotenv').config();
 
 const app = express();
 
+require('./config/db');
+
+const clienteRoutes = require('./routes/ClienteRoutes');
+app.use(clienteRoutes);
+
 app.use(express.json());
-app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.send('Servidor funcionando!');
