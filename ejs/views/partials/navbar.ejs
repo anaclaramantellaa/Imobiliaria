@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-aliados">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <i class="bi bi-house-door-fill" style="font-size: 1.3rem; color: #d9e2cf;"></i>
+      <span>
+        Aliados da Tessoura
+        <small>Imobiliária</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAliados" style="border-color: rgba(255,255,255,0.3);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navAliados">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link <%= active === 'inicio' ? 'active' : '' %>" href="/">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= active === 'imoveis' ? 'active' : '' %>" href="/imoveis">Imóveis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= active === 'clientes' ? 'active' : '' %>" href="/clientes">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= active === 'visitas' ? 'active' : '' %>" href="/visitas">Visitas</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <span class="avatar-circle"><%= usuario.nome.charAt(0).toUpperCase() %></span>
+        <span class="text-white-50 d-none d-md-inline" style="font-size:0.9rem;"><%= usuario.nome %></span>
+        <a href="/logout" class="text-white-50" title="Sair" style="font-size: 1.1rem;">
+          <i class="bi bi-box-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

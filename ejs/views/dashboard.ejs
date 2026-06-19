@@ -1,0 +1,80 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar', { active: 'inicio' }) %>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div>
+        <h2>Painel principal</h2>
+        <p>Resumo geral do sistema</p>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="summary-card">
+          <div class="icon-box"><i class="bi bi-building"></i></div>
+          <div>
+            <div class="summary-label">Imóveis cadastrados</div>
+            <div class="summary-value"><%= totalImoveis %></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="summary-card">
+          <div class="icon-box"><i class="bi bi-people"></i></div>
+          <div>
+            <div class="summary-label">Clientes cadastrados</div>
+            <div class="summary-value"><%= totalClientes %></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="summary-card">
+          <div class="icon-box"><i class="bi bi-calendar-check"></i></div>
+          <div>
+            <div class="summary-label">Visitas cadastradas</div>
+            <div class="summary-value"><%= totalVisitas %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h6 class="fw-bold mb-3" style="color: var(--verde-escuro);">Próximas visitas</h6>
+
+      <% if (proximasVisitas.length === 0) { %>
+        <p class="text-muted mb-0">Nenhuma visita agendada no momento.</p>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table table-aliados mb-0">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Cliente</th>
+                <th>Imóvel</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% proximasVisitas.forEach(v => { %>
+                <tr>
+                  <td><%= formatarData(v.data) %></td>
+                  <td><%= v.horario %></td>
+                  <td><%= v.cliente ? v.cliente.nome : '—' %></td>
+                  <td><%= v.imovel ? v.imovel.endereco : '—' %></td>
+                  <td>
+                    <span class="badge-status <%= v.status === 'Agendada' ? 'badge-verde' : 'badge-laranja' %>">
+                      <%= v.status %>
+                    </span>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>

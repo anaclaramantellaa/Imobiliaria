@@ -1,0 +1,344 @@
+:root {
+  --verde-escuro: #36492f;
+  --verde-medio: #54713f;
+  --verde-claro: #7c9a6a;
+  --creme: #f6f2e9;
+  --creme-card: #ffffff;
+  --texto: #2e2e2e;
+  --texto-suave: #6b6b6b;
+  --borda: #e3ddcf;
+
+  --badge-verde-bg: #dcebd2;
+  --badge-verde-texto: #3f6b2c;
+  --badge-laranja-bg: #fbe3c4;
+  --badge-laranja-texto: #b5701b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--creme);
+  color: var(--texto);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-aliados {
+  background-color: var(--verde-escuro);
+  padding: 0.65rem 1.5rem;
+}
+
+.navbar-aliados .navbar-brand {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-aliados .navbar-brand small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #d9e2cf;
+}
+
+.navbar-aliados .nav-link {
+  color: #d9e2cf !important;
+  font-weight: 500;
+  margin: 0 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navbar-aliados .nav-link:hover,
+.navbar-aliados .nav-link.active {
+  color: #fff !important;
+  border-bottom-color: var(--verde-claro);
+}
+
+.navbar-aliados .avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--verde-claro);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ---------- Login ---------- */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--creme);
+}
+
+.login-card {
+  background-color: var(--creme-card);
+  border-radius: 14px;
+  padding: 2.5rem 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--borda);
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-logo .logo-icon {
+  font-size: 2.2rem;
+  color: var(--verde-medio);
+}
+
+.login-logo h1 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--verde-escuro);
+  margin: 0.4rem 0 0;
+}
+
+.login-logo p {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+/* ---------- Cards / Containers gerais ---------- */
+.page-container {
+  padding: 2rem 2.5rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header h2 {
+  font-weight: 700;
+  color: var(--verde-escuro);
+  margin-bottom: 0.15rem;
+}
+
+.page-header p {
+  color: var(--texto-suave);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.summary-card {
+  background-color: var(--creme-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+}
+
+.summary-card .icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #eef3e8;
+  color: var(--verde-medio);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.summary-card .summary-label {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.1rem;
+}
+
+.summary-card .summary-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.content-card {
+  background-color: var(--creme-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* ---------- Tabelas ---------- */
+.table-aliados thead th {
+  color: var(--texto-suave);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--borda);
+  background-color: transparent;
+  padding-bottom: 0.75rem;
+}
+
+.table-aliados td {
+  vertical-align: middle;
+  border-bottom: 1px solid var(--borda);
+  padding: 0.85rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+.table-aliados tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-aliados tbody tr:hover {
+  background-color: #faf8f2;
+}
+
+/* ---------- Badges de status ---------- */
+.badge-status {
+  display: inline-block;
+  padding: 0.32rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-verde {
+  background-color: var(--badge-verde-bg);
+  color: var(--badge-verde-texto);
+}
+
+.badge-laranja {
+  background-color: var(--badge-laranja-bg);
+  color: var(--badge-laranja-texto);
+}
+
+/* ---------- Botões ---------- */
+.btn-aliados-primario {
+  background-color: var(--verde-medio);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.55rem 1.3rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-aliados-primario:hover {
+  background-color: var(--verde-escuro);
+  color: #fff;
+}
+
+.btn-aliados-secundario {
+  background-color: #eceae2;
+  border: none;
+  color: var(--texto);
+  font-weight: 600;
+  padding: 0.55rem 1.3rem;
+  border-radius: 8px;
+}
+
+.btn-aliados-secundario:hover {
+  background-color: #ddd9cb;
+}
+
+.btn-icon-action {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--borda);
+  background-color: #fff;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-suave);
+  margin-right: 0.3rem;
+  transition: all 0.15s ease;
+}
+
+.btn-icon-action:hover {
+  background-color: #f4f1e8;
+  color: var(--texto);
+}
+
+.btn-icon-action.danger:hover {
+  background-color: #fbe5e1;
+  color: #c0392b;
+  border-color: #f3c8c1;
+}
+
+/* ---------- Formulários ---------- */
+.form-aliados label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 0.35rem;
+}
+
+.form-aliados .form-control,
+.form-aliados .form-select {
+  background-color: #faf8f2;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.92rem;
+}
+
+.form-aliados .form-control:focus,
+.form-aliados .form-select:focus {
+  border-color: var(--verde-claro);
+  box-shadow: 0 0 0 3px rgba(124, 154, 106, 0.18);
+}
+
+.form-card {
+  background-color: var(--creme-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.form-card h2 {
+  font-weight: 700;
+  color: var(--verde-escuro);
+}
+
+.form-card > p {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+.alert-erro {
+  background-color: #fbe5e1;
+  color: #b03a2e;
+  border: 1px solid #f3c8c1;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1.25rem;
+  }
+}

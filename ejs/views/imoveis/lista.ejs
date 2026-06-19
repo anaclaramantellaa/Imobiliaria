@@ -1,0 +1,63 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar', { active: 'imoveis' }) %>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div>
+        <h2>Imóveis</h2>
+        <p>Gerencie os imóveis cadastrados</p>
+      </div>
+      <a href="/imoveis/novo" class="btn btn-aliados-primario">
+        <i class="bi bi-plus-lg me-1"></i> Novo imóvel
+      </a>
+    </div>
+
+    <div class="content-card">
+      <% if (imoveis.length === 0) { %>
+        <p class="text-muted mb-0">Nenhum imóvel cadastrado ainda.</p>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table table-aliados mb-0">
+            <thead>
+              <tr>
+                <th>Zona</th>
+                <th>Endereço</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% imoveis.forEach(imovel => { %>
+                <tr>
+                  <td><%= imovel.zona %></td>
+                  <td><%= imovel.endereco %></td>
+                  <td><%= imovel.tipo %></td>
+                  <td><%= formatarMoeda(imovel.valor) %></td>
+                  <td>
+                    <span class="badge-status <%= imovel.status === 'Disponível' ? 'badge-verde' : 'badge-laranja' %>">
+                      <%= imovel.status %>
+                    </span>
+                  </td>
+                  <td>
+                    <a href="/imoveis/<%= imovel.id %>/editar" class="btn-icon-action" title="Editar">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <form action="/imoveis/<%= imovel.id %>?_method=DELETE" method="POST" class="d-inline"
+                          onsubmit="return confirm('Tem certeza que deseja excluir este imóvel?');">
+                      <button type="submit" class="btn-icon-action danger" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>
