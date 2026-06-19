@@ -1,0 +1,65 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar', { active: 'visitas' }) %>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div>
+        <h2>Visitas</h2>
+        <p>Gerencie suas visitas cadastradas</p>
+      </div>
+      <a href="/visitas/novo" class="btn btn-aliados-primario">
+        <i class="bi bi-plus-lg me-1"></i> Nova visita
+      </a>
+    </div>
+
+    <div class="content-card">
+      <% if (visitas.length === 0) { %>
+        <p class="text-muted mb-0">Nenhuma visita cadastrada ainda.</p>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table table-aliados mb-0">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Cliente</th>
+                <th>Imóvel</th>
+                <th>Observação</th>
+                <th>Status</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% visitas.forEach(visita => { %>
+                <tr>
+                  <td><%= formatarData(visita.data) %></td>
+                  <td><%= visita.horario %></td>
+                  <td><%= visita.cliente ? visita.cliente.nome : '—' %></td>
+                  <td><%= visita.imovel ? visita.imovel.endereco : '—' %></td>
+                  <td><%= visita.observacao || '—' %></td>
+                  <td>
+                    <span class="badge-status <%= visita.status === 'Agendada' ? 'badge-verde' : 'badge-laranja' %>">
+                      <%= visita.status %>
+                    </span>
+                  </td>
+                  <td>
+                    <a href="/visitas/<%= visita.id %>/editar" class="btn-icon-action" title="Editar">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <form action="/visitas/<%= visita.id %>?_method=DELETE" method="POST" class="d-inline"
+                          onsubmit="return confirm('Tem certeza que deseja excluir esta visita?');">
+                      <button type="submit" class="btn-icon-action danger" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>

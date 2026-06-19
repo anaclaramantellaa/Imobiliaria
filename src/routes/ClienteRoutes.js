@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const conexao = require('../config/db');
+const conexao = require('../../config/db');
 
 router.get('/clientes', (req, res) => {
     conexao.query('SELECT * FROM cliente', (erro, resultados) => {

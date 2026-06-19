@@ -1,0 +1,63 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar', { active: 'clientes' }) %>
+
+  <div class="page-container">
+    <div class="form-card">
+      <h2><%= cliente ? 'Editar cliente' : 'Novo cliente' %></h2>
+      <p>Preencha as informações</p>
+
+      <form
+        action="<%= cliente ? '/clientes/' + cliente.id + '?_method=PUT' : '/clientes' %>"
+        method="POST"
+        class="form-aliados"
+      >
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nome">Nome completo</label>
+            <input type="text" class="form-control" id="nome" name="nome"
+                   placeholder="Ex: Ana Julia Prado"
+                   value="<%= cliente ? cliente.nome : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf"
+                   placeholder="000.000.000-00"
+                   value="<%= cliente ? cliente.cpf : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   placeholder="cliente@email.com"
+                   value="<%= cliente ? cliente.email : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="telefone">Telefone</label>
+            <input type="text" class="form-control" id="telefone" name="telefone"
+                   placeholder="(00) 00000-0000"
+                   value="<%= cliente ? cliente.telefone : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="tipo">Tipo</label>
+            <select class="form-select" id="tipo" name="tipo" required>
+              <option value="" disabled <%= !cliente ? 'selected' : '' %>>Selecionar...</option>
+              <option value="Comprador" <%= cliente && cliente.tipo === 'Comprador' ? 'selected' : '' %>>Comprador</option>
+              <option value="Locatário" <%= cliente && cliente.tipo === 'Locatário' ? 'selected' : '' %>>Locatário</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="my-4" style="border-color: var(--borda);">
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-aliados-primario">Salvar</button>
+          <a href="/clientes" class="btn btn-aliados-secundario">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<%- include('../partials/footer') %>

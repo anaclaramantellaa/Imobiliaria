@@ -1,0 +1,37 @@
+<%- include('partials/head') %>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="login-logo">
+        <i class="bi bi-house-door-fill logo-icon"></i>
+        <h1>Aliados da Tesoura</h1>
+        <p>Imobiliária</p>
+      </div>
+
+      <% if (erro) { %>
+        <div class="alert-erro">
+          <i class="bi bi-exclamation-circle me-1"></i><%= erro %>
+        </div>
+      <% } %>
+
+      <form action="/login" method="POST" class="form-aliadas">
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="admin@email.com" required autofocus>
+        </div>
+
+        <div class="mb-4">
+          <label for="senha">Senha</label>
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="**********" required>
+        </div>
+
+        <button type="submit" class="btn btn-aliadas-primario w-100">Aliar-se</button>
+      </form>
+
+      <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.75rem;">
+        Use <strong>admin@email.com</strong> / <strong>123456</strong> para entrar
+      </p>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>

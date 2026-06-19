@@ -5,8 +5,8 @@ const app = express();
 
 require('./config/db');
 
-const clienteRoutes = require('./routes/ClienteRoutes');
-app.use(clienteRoutes);
+const clienteRoutes = require('./src/routes/ClienteRoutes');
+app.use('/clientes',clienteRoutes);
 
 app.use(express.json());
 

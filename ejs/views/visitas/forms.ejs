@@ -1,0 +1,158 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar', { active: 'visitas' }) %>
+
+  <div class="page-container">
+    <div class="form-card">
+      <h2><%= visita ? 'Editar visita' : 'Nova visita' %></h2>
+      <p>Preencha as informações</p>
+
+      <form
+        action="<%= visita ? '/visitas/' + visita.id + '?_method=PUT' : '/visitas' %>"
+        method="POST"
+        class="form-aliados"
+      >
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="clienteId">Cliente</label>
+            <select class="form-select" id="clienteId" name="clienteId" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <% clientes.forEach(c => { %>
+                <option value="<%= c.id %>" <%= visita && visita.clienteId === c.id ? 'selected' : '' %>>
+                  <%= c.nome %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="data">Data</label>
+            <input type="date" class="form-control" id="data" name="data"
+                   value="<%= visita ? visita.data : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="imovelId">Imóvel</label>
+            <select class="form-select" id="imovelId" name="imovelId" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <% imoveis.forEach(i => { %>
+                <option value="<%= i.id %>" <%= visita && visita.imovelId === i.id ? 'selected' : '' %>>
+                  <%= i.endereco %> (<%= i.tipo %>)
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="horario">Horário</label>
+            <input type="time" class="form-control" id="horario" name="horario"
+                   value="<%= visita ? visita.horario : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="observacao">Observação</label>
+            <input type="text" class="form-control" id="observacao" name="observacao"
+                   placeholder="Ex: Esse cliente já visitou"
+                   value="<%= visita ? visita.observacao : '' %>">
+          </div>
+
+          <div class="col-md-6">
+            <label for="status">Status</label>
+            <select class="form-select" id="status" name="status" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <option value="Agendada" <%= visita && visita.status === 'Agendada' ? 'selected' : '' %>>Agendada</option>
+              <option value="Realizada" <%= visita && visita.status === 'Realizada' ? 'selected' : '' %>>Realizada</option>
+              <option value="Cancelada" <%= visita && visita.status === 'Cancelada' ? 'selected' : '' %>>Cancelada</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="my-4" style="border-color: var(--borda);">
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-aliados-primario">Salvar</button>
+          <a href="/visitas" class="btn btn-aliados-secundario">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/head') %>
+<%- include('../partials/navbar', { active: 'visitas' }) %>
+
+  <div class="page-container">
+    <div class="form-card">
+      <h2><%= visita ? 'Editar visita' : 'Nova visita' %></h2>
+      <p>Preencha as informações</p>
+
+      <form
+        action="<%= visita ? '/visitas/' + visita.id + '?_method=PUT' : '/visitas' %>"
+        method="POST"
+        class="form-aliados"
+      >
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="clienteId">Cliente</label>
+            <select class="form-select" id="clienteId" name="clienteId" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <% clientes.forEach(c => { %>
+                <option value="<%= c.id %>" <%= visita && visita.clienteId === c.id ? 'selected' : '' %>>
+                  <%= c.nome %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="data">Data</label>
+            <input type="date" class="form-control" id="data" name="data"
+                   value="<%= visita ? visita.data : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="imovelId">Imóvel</label>
+            <select class="form-select" id="imovelId" name="imovelId" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <% imoveis.forEach(i => { %>
+                <option value="<%= i.id %>" <%= visita && visita.imovelId === i.id ? 'selected' : '' %>>
+                  <%= i.endereco %> (<%= i.tipo %>)
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="horario">Horário</label>
+            <input type="time" class="form-control" id="horario" name="horario"
+                   value="<%= visita ? visita.horario : '' %>" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="observacao">Observação</label>
+            <input type="text" class="form-control" id="observacao" name="observacao"
+                   placeholder="Ex: Esse cliente já visitou"
+                   value="<%= visita ? visita.observacao : '' %>">
+          </div>
+
+          <div class="col-md-6">
+            <label for="status">Status</label>
+            <select class="form-select" id="status" name="status" required>
+              <option value="" disabled <%= !visita ? 'selected' : '' %>>Selecionar...</option>
+              <option value="Agendada" <%= visita && visita.status === 'Agendada' ? 'selected' : '' %>>Agendada</option>
+              <option value="Realizada" <%= visita && visita.status === 'Realizada' ? 'selected' : '' %>>Realizada</option>
+              <option value="Cancelada" <%= visita && visita.status === 'Cancelada' ? 'selected' : '' %>>Cancelada</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="my-4" style="border-color: var(--borda);">
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-aliados-primario">Salvar</button>
+          <a href="/visitas" class="btn btn-aliados-secundario">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<%- include('../partials/footer') %>
