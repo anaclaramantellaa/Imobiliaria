@@ -3,21 +3,21 @@ const db = require('../../config/db');
 const DashboardController = {
     index: (req, res) => {
         // Buscar total de clientes
-        db.query('SELECT COUNT(*) AS total FROM cliente', (err, clientesResult) => {
+        db.query('SELECT COUNT(*) AS total FROM cliente', (err, clientesResultado) => {
             if (err) {
                 console.error('Erro ao contar clientes:', err);
                 return res.status(500).send('Erro ao carregar dashboard');
             }
 
             // Buscar total de imóveis
-            db.query('SELECT COUNT(*) AS total FROM imovel', (err, imoveisResult) => {
+            db.query('SELECT COUNT(*) AS total FROM imovel', (err, imoveisResultado) => {
                 if (err) {
                     console.error('Erro ao contar imóveis:', err);
                     return res.status(500).send('Erro ao carregar dashboard');
                 }
 
                 // Buscar total de visitas
-                db.query('SELECT COUNT(*) AS total FROM visita', (err, visitasResult) => {
+                db.query('SELECT COUNT(*) AS total FROM visita', (err, visitasResultado) => {
                     if (err) {
                         console.error('Erro ao contar visitas:', err);
                         return res.status(500).send('Erro ao carregar dashboard');
@@ -41,9 +41,9 @@ const DashboardController = {
                         }
 
                         // Formatar dados para a view
-                        const totalClientes = clientesResult[0]?.total || 0;
-                        const totalImoveis = imoveisResult[0]?.total || 0;
-                        const totalVisitas = visitasResult[0]?.total || 0;
+                        const totalClientes = clientesResultado[0]?.total || 0;
+                        const totalImoveis = imoveisResultado[0]?.total || 0;
+                        const totalVisitas = visitasResultado[0]?.total || 0;
 
                         // Formatar as visitas para a view
                         const proximasVisitas = visitas.map(v => ({

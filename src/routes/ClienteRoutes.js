@@ -1,25 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const ClienteController = require('../controllers/ClienteController');
+const { auth } = require('../middlewares/auth');
 
-// ========== ROTAS CRUD ==========
+router.use(auth);
 
-// Listar todos os clientes (GET /cliente)
 router.get('/', ClienteController.listar);
-
-// Exibir formulário para NOVO cliente (GET /cliente/novo)
-router.get('/novo', ClienteController.mostrarFormulario);
-
-// Exibir formulário para EDITAR cliente (GET /cliente/:id/editar)
-router.get('/:id/editar', ClienteController.mostrarFormulario);
-
-// Cadastrar novo cliente (POST /cliente)
+router.get('/novo', ClienteController.mostrarFormulario); // Exibir formulário para NOVO cliente 
+router.get('/:id/editar', ClienteController.mostrarFormulario); // Exibir formulário para EDITAR cliente 
 router.post('/', ClienteController.cadastrar);
-
-// Atualizar cliente existente (PUT /cliente/:id)
-router.put('/:id', ClienteController.editar);
-
-// Excluir cliente (DELETE /cliente/:id)
+router.put('/:id', ClienteController.editar); // Atualizar cliente existente PUT
 router.delete('/:id', ClienteController.excluir);
 
 module.exports = router;
+
+//GET = pega info
+//POST = envia dados novos, criar algo
+//PUT = atualiza algo existente
+//DELETE = excluir 
