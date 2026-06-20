@@ -7,7 +7,7 @@
       <p>Preencha as informações</p>
 
       <form
-        action="<%= cliente ? '/clientes/' + cliente.id + '?_method=PUT' : '/clientes' %>"
+        action="<%= cliente ? '/cliente/' + cliente.id_cliente + '?_method=PUT' : '/cliente' %>"
         method="POST"
         class="form-aliados"
       >
@@ -44,8 +44,8 @@
             <label for="tipo">Tipo</label>
             <select class="form-select" id="tipo" name="tipo" required>
               <option value="" disabled <%= !cliente ? 'selected' : '' %>>Selecionar...</option>
-              <option value="Comprador" <%= cliente && cliente.tipo === 'Comprador' ? 'selected' : '' %>>Comprador</option>
-              <option value="Locatário" <%= cliente && cliente.tipo === 'Locatário' ? 'selected' : '' %>>Locatário</option>
+              <option value="comprador" <%= cliente && cliente.tipo === 'comprador' ? 'selected' : '' %>>Comprador</option>
+              <option value="locatário" <%= cliente && cliente.tipo === 'locatário' ? 'selected' : '' %>>Locatário</option>
             </select>
           </div>
         </div>
@@ -54,7 +54,7 @@
 
         <div class="d-flex gap-2">
           <button type="submit" class="btn btn-aliados-primario">Salvar</button>
-          <a href="/clientes" class="btn btn-aliados-secundario">Cancelar</a>
+          <a href="/cliente" class="btn btn-aliados-secundario">Cancelar</a>
         </div>
       </form>
     </div>

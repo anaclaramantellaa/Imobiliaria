@@ -1,39 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-aliados">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
     <a class="navbar-brand" href="/">
-      <i class="bi bi-house-door-fill" style="font-size: 1.3rem; color: #d9e2cf;"></i>
-      <span>
-        Aliados da Tessoura
-        <small>Imobiliária</small>
-      </span>
+      <i class="bi bi-house-door"></i> Aliadas da Tesoura
     </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAliados" style="border-color: rgba(255,255,255,0.3);">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navAliados">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link <%= active === 'inicio' ? 'active' : '' %>" href="/">Início</a>
+          <a class="nav-link <%= active === 'inicio' ? 'active' : '' %>" href="/">
+            <i class="bi bi-house"></i> Início
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= active === 'imoveis' ? 'active' : '' %>" href="/imoveis">Imóveis</a>
+          <a class="nav-link <%= active === 'clientes' ? 'active' : '' %>" href="/cliente">
+            <i class="bi bi-people"></i> Clientes
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= active === 'clientes' ? 'active' : '' %>" href="/clientes">Clientes</a>
+          <a class="nav-link <%= active === 'imoveis' ? 'active' : '' %>" href="/imoveis">
+            <i class="bi bi-building"></i> Imóveis
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= active === 'visitas' ? 'active' : '' %>" href="/visitas">Visitas</a>
+          <a class="nav-link <%= active === 'visitas' ? 'active' : '' %>" href="/visitas">
+            <i class="bi bi-calendar-check"></i> Visitas
+          </a>
         </li>
       </ul>
 
       <div class="d-flex align-items-center gap-3">
-        <span class="avatar-circle"><%= usuario.nome.charAt(0).toUpperCase() %></span>
-        <span class="text-white-50 d-none d-md-inline" style="font-size:0.9rem;"><%= usuario.nome %></span>
-        <a href="/logout" class="text-white-50" title="Sair" style="font-size: 1.1rem;">
-          <i class="bi bi-box-arrow-right"></i>
-        </a>
+        <% if (usuario) { %>
+          <span class="avatar-circle"><%= usuario.nome.charAt(0).toUpperCase() %></span>
+          <span class="text-white-50 d-none d-md-inline" style="font-size:0.9rem;"><%= usuario.nome %></span>
+          <a href="/logout" class="text-white-50" title="Sair" style="font-size: 1.1rem;">
+            <i class="bi bi-box-arrow-right"></i>
+          </a>
+        <% } else { %>
+          <a href="/login" class="btn btn-outline-light btn-sm">
+            <i class="bi bi-box-arrow-in-right"></i> Entrar
+          </a>
+        <% } %>
       </div>
     </div>
   </div>

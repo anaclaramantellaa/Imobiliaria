@@ -1,80 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const conexao = require('../../config/db');
+const ClienteController = require('../controllers/ClienteController');
 
-router.get('/clientes', (req, res) => {
-    conexao.query('SELECT * FROM cliente', (erro, resultados) => {
-        if (erro) {
-            return res.status(500).json(erro);
-        }
+// ========== ROTAS CRUD ==========
 
-        res.json(resultados);
-    });
-});
-router.post('/clientes', (req, res) => {
-    const { nome, cpf, telefone, email } = req.body;
+// Listar todos os clientes (GET /cliente)
+router.get('/', ClienteController.listar);
 
-    const sql = `
-        INSERT INTO cliente (nome, cpf, telefone, email)
-        VALUES (?, ?, ?, ?)
-    `;
+// Exibir formulário para NOVO cliente (GET /cliente/novo)
+router.get('/novo', ClienteController.mostrarFormulario);
 
-    conexao.query(
-        sql,
-        [nome, cpf, telefone, email],
-        (erro, resultado) => {
-            if (erro) {
-                return res.status(500).json(erro);
-            }
+// Exibir formulário para EDITAR cliente (GET /cliente/:id/editar)
+router.get('/:id/editar', ClienteController.mostrarFormulario);
 
-            res.status(201).json({
-                mensagem: 'Cliente cadastrado com sucesso!',
-                id: resultado.insertId
-            });
-        }
-    );
-});
-router.post('/clientes', (req, res) => {
-    const { nome, cpf, telefone, email } = req.body;
+// Cadastrar novo cliente (POST /cliente)
+router.post('/', ClienteController.cadastrar);
 
-    const sql = `
-        INSERT INTO cliente (nome, cpf, telefone, email)
-        VALUES (?, ?, ?, ?)
-    `;
+// Atualizar cliente existente (PUT /cliente/:id)
+router.put('/:id', ClienteController.editar);
 
-    conexao.query(
-        sql,
-        [nome, cpf, telefone, email],
-        (erro, resultado) => {
-            if (erro) {
-                return res.status(500).json(erro);
-            }
-
-            res.status(201).json({
-                mensagem: 'Cliente cadastrado com sucesso!',
-                id: resultado.insertId
-            });
-        }
-    );
-});
-router.post('/clientes', (req, res) => {
-    const { nome, cpf, telefone, email } = req.body;
-
-    const sql = `
-        INSERT INTO cliente (nome, cpf, telefone, email)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    conexao.query(sql, [nome, cpf, telefone, email], (erro, resultado) => {
-        if (erro) {
-            return res.status(500).json(erro);
-        }
-
-        res.status(201).json({
-            mensagem: 'Cliente cadastrado com sucesso!',
-            id: resultado.insertId
-        });
-    });
-});
+// Excluir cliente (DELETE /cliente/:id)
+router.delete('/:id', ClienteController.excluir);
 
 module.exports = router;

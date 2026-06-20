@@ -1,5 +1,5 @@
-<%- include('partials/head') %>
-<%- include('partials/navbar', { active: 'clientes' }) %>
+<%- include('../partials/head') %>
+<%- include('../partials/navbar', { active: 'clientes' }) %>
 
   <div class="page-container">
     <div class="page-header">
@@ -7,7 +7,7 @@
         <h2>Clientes</h2>
         <p>Gerencie os clientes cadastrados</p>
       </div>
-      <a href="/clientes/novo" class="btn btn-aliados-primario">
+      <a href="/cliente/novo" class="btn btn-aliados-primario">
         <i class="bi bi-plus-lg me-1"></i> Novo cliente
       </a>
     </div>
@@ -36,15 +36,15 @@
                   <td><%= cliente.email %></td>
                   <td><%= cliente.telefone %></td>
                   <td>
-                    <span class="badge-status <%= cliente.tipo === 'Comprador' ? 'badge-verde' : 'badge-laranja' %>">
+                    <span class="badge-status <%= cliente.tipo === 'comprador' ? 'badge-verde' : 'badge-laranja' %>">
                       <%= cliente.tipo %>
                     </span>
                   </td>
                   <td>
-                    <a href="/clientes/<%= cliente.id %>/editar" class="btn-icon-action" title="Editar">
+                    <a href="/cliente/<%= cliente.id_cliente %>/editar" class="btn-icon-action" title="Editar">
                       <i class="bi bi-pencil"></i>
                     </a>
-                    <form action="/clientes/<%= cliente.id %>?_method=DELETE" method="POST" class="d-inline"
+                    <form action="/cliente/<%= cliente.id_cliente %>?_method=DELETE" method="POST" class="d-inline"
                           onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
                       <button type="submit" class="btn-icon-action danger" title="Excluir">
                         <i class="bi bi-trash"></i>
@@ -60,4 +60,4 @@
     </div>
   </div>
 
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>
