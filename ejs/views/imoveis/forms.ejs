@@ -1,70 +1,70 @@
 <%- include('../partials/head') %>
 <%- include('../partials/navbar', { active: 'imoveis' }) %>
 
-  <div class="page-container">
-    <div class="form-card">
-      <h2><%= imovel ? 'Editar imóvel' : 'Novo imóvel' %></h2>
-      <p>Preencha as informações</p>
+<div class="page-container">
+  <div class="form-card">
+    <h2><%= imovel ? 'Editar imóvel' : 'Novo imóvel' %></h2>
+    <p>Preencha as informações</p>
 
-      <form
-        action="<%= imovel ? '/imoveis/' + imovel.id + '?_method=PUT' : '/imoveis' %>"
-        method="POST"
-        class="form-aliados"
-      >
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label for="endereco">Endereço</label>
-            <input type="text" class="form-control" id="endereco" name="endereco"
-                   placeholder="Ex: Casa perto do lago"
-                   value="<%= imovel ? imovel.endereco : '' %>" required>
-          </div>
-
-          <div class="col-md-6">
-            <label for="status">Status</label>
-            <select class="form-select" id="status" name="status" required>
-              <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
-              <option value="Disponível" <%= imovel && imovel.status === 'Disponível' ? 'selected' : '' %>>Disponível</option>
-              <option value="Alugado" <%= imovel && imovel.status === 'Alugado' ? 'selected' : '' %>>Alugado</option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label for="zona">Zona</label>
-            <select class="form-select" id="zona" name="zona" required>
-              <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
-              <% ['Norte', 'Sul', 'Leste', 'Oeste', 'Centro'].forEach(z => { %>
-                <option value="<%= z %>" <%= imovel && imovel.zona === z ? 'selected' : '' %>><%= z %></option>
-              <% }) %>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label for="tipo">Tipo</label>
-            <select class="form-select" id="tipo" name="tipo" required>
-              <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
-              <option value="Casa" <%= imovel && imovel.tipo === 'Casa' ? 'selected' : '' %>>Casa</option>
-              <option value="Apartamento" <%= imovel && imovel.tipo === 'Apartamento' ? 'selected' : '' %>>Apartamento</option>
-              <option value="Terreno" <%= imovel && imovel.tipo === 'Terreno' ? 'selected' : '' %>>Terreno</option>
-              <option value="Sala Comercial" <%= imovel && imovel.tipo === 'Sala Comercial' ? 'selected' : '' %>>Sala Comercial</option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label for="valor">Valor</label>
-            <input type="number" step="0.01" min="0" class="form-control" id="valor" name="valor"
-                   placeholder="100.000"
-                   value="<%= imovel ? imovel.valor : '' %>" required>
-          </div>
+    <form
+      action="<%= imovel ? '/imoveis/' + imovel.id_imovel + '?_method=PUT' : '/imoveis' %>"
+      method="POST"
+      class="form-aliados"
+    >
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="endereco">Endereço</label>
+          <input type="text" class="form-control" id="endereco" name="endereco"
+                 placeholder="Ex: Rua das Flores, 123"
+                 value="<%= imovel ? imovel.endereco : '' %>" required>
         </div>
 
-        <hr class="my-4" style="border-color: var(--borda);">
-
-        <div class="d-flex gap-2">
-          <button type="submit" class="btn btn-aliados-primario">Salvar</button>
-          <a href="/imoveis" class="btn btn-aliados-secundario">Cancelar</a>
+        <div class="col-md-6">
+          <label for="status">Status</label>
+          <select class="form-select" id="status" name="status" required>
+            <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
+            <option value="disponível" <%= imovel && imovel.status === 'disponível' ? 'selected' : '' %>>Disponível</option>
+            <option value="alugado" <%= imovel && imovel.status === 'alugado' ? 'selected' : '' %>>Alugado</option>
+            <option value="vendido" <%= imovel && imovel.status === 'vendido' ? 'selected' : '' %>>Vendido</option>
+          </select>
         </div>
-      </form>
-    </div>
+
+        <div class="col-md-4">
+          <label for="zona">Zona</label>
+          <select class="form-select" id="zona" name="zona" required>
+            <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
+            <% ['Zona Norte', 'Zona Sul', 'Zona Leste', 'Zona Oeste', 'Centro'].forEach(z => { %>
+              <option value="<%= z %>" <%= imovel && imovel.zona === z ? 'selected' : '' %>><%= z %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="tipo">Tipo</label>
+          <select class="form-select" id="tipo" name="tipo" required>
+            <option value="" disabled <%= !imovel ? 'selected' : '' %>>Selecionar...</option>
+            <option value="casa" <%= imovel && imovel.tipo === 'casa' ? 'selected' : '' %>>Casa</option>
+            <option value="apartamento" <%= imovel && imovel.tipo === 'apartamento' ? 'selected' : '' %>>Apartamento</option>
+            <option value="outro" <%= imovel && imovel.tipo === 'outro' ? 'selected' : '' %>>Outro</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="valor">Valor (R$)</label>
+          <input type="number" step="0.01" min="0" class="form-control" id="valor" name="valor"
+                 placeholder="350000.00"
+                 value="<%= imovel ? imovel.valor : '' %>" required>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--borda);">
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-aliadas-primario">Salvar</button>
+        <a href="/imoveis" class="btn btn-aliadas-secundario">Cancelar</a>
+      </div>
+    </form>
   </div>
+</div>
 
 <%- include('../partials/footer') %>

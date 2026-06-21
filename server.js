@@ -35,10 +35,12 @@ const { auth } = require('./src/middlewares/auth');
 // Rotas
 const authRoutes = require('./src/routes/authRoutes');
 const clienteRoutes = require('./src/routes/ClienteRoutes');
+const imoveisRoutes = require('./src/routes/ImoveisRoutes');
 const visitaRoutes = require('./src/routes/VisitaRoutes');
 
 app.use('/', authRoutes);
 app.use('/cliente', auth, clienteRoutes);
+app.use('/imoveis', auth, imoveisRoutes); 
 app.use('/visitas', auth, visitaRoutes);
 
 // dashboard

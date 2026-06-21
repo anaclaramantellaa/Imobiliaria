@@ -1,61 +1,81 @@
-const Imoveis = require('../models/ImoveisModel');
+const ImoveisModel = require('../models/ImoveisModel');
 
 const ImoveisController = {
-
     listar: (req, res) => {
-        Imoveis.listar((err, result) => {
+        ImoveisModel.listar((err, results) => {
             if (err) {
-                return res.status(500).json({ erro: err });
+                console.error('Erro ao listar imóveis:', err);
+                return res.status(500).render('erros/500', {
+                    mensagem: 'Erro ao carregar imóveis'
+                });
             }
-            res.json(result);
-        });
-    },
-
-    buscarPorId: (req, res) => {
-        const id = req.params.id;
-
-        Imoveis.buscaPorId(id, (err, result) => {
-            if (err) {
-                return res.status(500).json({ erro: err });
-            }
-            res.json(result);
-        });
-    },
-
-    criar: (req, res) => {
-        Imoveis.criar(req.body, (err, result) => {
-            if (err) {
-                return res.status(500).json({ erro: err });
-            }
-
-            res.status(201).json({
-                mensagem: "Imóvel criado com sucesso!",
-                id: result.insertId
+            res.render('imoveis/lista', {
+                imoveis: results,
+                usuario: req.session?.usuario
             });
         });
     },
 
-    atualizar: (req, res) => {
+    mostrarFormulario: (req, res) => {
         const id = req.params.id;
 
-        Imoveis.atualizar(id, req.body, (err) => {
-            if (err) {
-                return res.status(500).json({ erro: err });
-            }
+        if (id) {
+            // EDIÇÃO
+            ImoveisModel.buscaPorId(id, (err, results) => {
+                if (err || results.length === 0) {
+                    return res.status(404).send('Imóvel não encontrado');
+                }
+                res.render('imoveis/forms', {
+                    imovel: results[0],
+                    usuario: req.session?.usuario
+                });
+            });
+        } else {
+            // NOVO
+            res.render('imoveis/forms', {
+                imovel: null,
+                usuario: req.session?.usuario
+            });
+        }
+    },
 
-            res.json({ mensagem: "Imóvel atualizado com sucesso!" });
+    criar: (req, res) => {
+        const { zona, endereco, tipo, valor, status } = req.body;
+
+        if (!zona || !endereco || !tipo || !valor) {
+            return res.status(400).send('Todos os campos são obrigatórios');
+        }
+
+        ImoveisModel.criar(req.body, (err) => {
+            if (err) {
+                console.error('Erro ao criar imóvel:', err);
+                return res.status(500).send('Erro ao cadastrar imóvel');
+            }
+            res.redirect('/imoveis');
+        });
+    },
+
+    editar: (req, res) => {
+        const id = req.params.id;
+
+        ImoveisModel.atualizar(id, req.body, (err) => {
+            if (err) {
+                console.error('Erro ao editar imóvel:', err);
+                return res.status(500).send('Erro ao editar imóvel');
+            }
+            res.redirect('/imoveis');
         });
     },
 
     deletar: (req, res) => {
         const id = req.params.id;
 
-        Imoveis.deletar(id, (err) => {
+        ImoveisModel.deletar(id, (err) => {
             if (err) {
-                return res.status(500).json({ erro: err });
+                console.error('Erro ao deletar imóvel:', err);
+                return res.status(500).send('Erro ao excluir imóvel');
             }
-
-            res.json({ mensagem: "Imóvel deletado com sucesso!" });
+            res.redirect('/imoveis');
         });
     }
 };

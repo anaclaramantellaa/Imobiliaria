@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const VisitaController = require('../controllers/VisitaController');
+const { auth } = require('../middlewares/auth'); 
+
+router.use(auth);
 
 router.get('/', VisitaController.listar);
 router.get('/novo', VisitaController.mostrarFormulario);

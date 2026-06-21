@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const ImoveisController = require('../controllers/ImoveisController');
+const { auth } = require('../middlewares/auth');
 
-const CorretorController = require('../controllers/ImoveisController');
+router.use(auth);
 
-router.get('/imoveis', ImoveisController.listar);
-router.get('/imoveis/:id', ImoveisController.buscarPorId);
-router.post('/imoveis', ImoveisController.criar);
-router.put('/imoveis/:id', ImoveisController.atualizar);
-router.delete('/imoveis/:id', ImoveisController.deletar);
+router.get('/', ImoveisController.listar);
+router.get('/novo', ImoveisController.mostrarFormulario);
+router.get('/:id/editar', ImoveisController.mostrarFormulario);
+router.post('/', ImoveisController.criar);
+router.put('/:id', ImoveisController.editar);
+router.delete('/:id', ImoveisController.deletar);
 
 module.exports = router;
