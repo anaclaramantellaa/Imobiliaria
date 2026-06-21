@@ -1,65 +1,84 @@
-<%- include('partials/head') %>
-<%- include('partials/navbar', { active: 'visitas' }) %>
+<%- include('../partials/head') %>
+<%- include('../partials/navbar', { active: 'visitas' }) %>
 
-  <div class="page-container">
-    <div class="page-header">
-      <div>
-        <h2>Visitas</h2>
-        <p>Gerencie suas visitas cadastradas</p>
-      </div>
-      <a href="/visitas/novo" class="btn btn-aliados-primario">
-        <i class="bi bi-plus-lg me-1"></i> Nova visita
-      </a>
-    </div>
+<%
+// Função para formatar data
+function formatarData(data) {
+    if (!data) return '--/--/----';
+    const d = new Date(data);
+    return d.toLocaleDateString('pt-BR');
+}
 
-    <div class="content-card">
-      <% if (visitas.length === 0) { %>
-        <p class="text-muted mb-0">Nenhuma visita cadastrada ainda.</p>
-      <% } else { %>
-        <div class="table-responsive">
-          <table class="table table-aliados mb-0">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Horário</th>
-                <th>Cliente</th>
-                <th>Imóvel</th>
-                <th>Observação</th>
-                <th>Status</th>
-                <th>Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% visitas.forEach(visita => { %>
-                <tr>
-                  <td><%= formatarData(visita.data) %></td>
-                  <td><%= visita.horario %></td>
-                  <td><%= visita.cliente ? visita.cliente.nome : '—' %></td>
-                  <td><%= visita.imovel ? visita.imovel.endereco : '—' %></td>
-                  <td><%= visita.observacao || '—' %></td>
-                  <td>
-                    <span class="badge-status <%= visita.status === 'Agendada' ? 'badge-verde' : 'badge-laranja' %>">
-                      <%= visita.status %>
-                    </span>
-                  </td>
-                  <td>
-                    <a href="/visitas/<%= visita.id %>/editar" class="btn-icon-action" title="Editar">
-                      <i class="bi bi-pencil"></i>
-                    </a>
-                    <form action="/visitas/<%= visita.id %>?_method=DELETE" method="POST" class="d-inline"
-                          onsubmit="return confirm('Tem certeza que deseja excluir esta visita?');">
-                      <button type="submit" class="btn-icon-action danger" title="Excluir">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-              <% }) %>
-            </tbody>
-          </table>
-        </div>
-      <% } %>
+// Função para formatar horário (pra remover os segundos)
+function formatarHorario(horario) {
+    if (!horario) return '--:--';
+    // Se for string no formato 'HH:MM:SS', pega só 'HH:MM'
+    if (typeof horario === 'string' && horario.includes(':')) {
+        return horario.substring(0, 5);
+    }
+    return horario;
+}
+
+%>
+
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h2>Visitas</h2>
+      <p>Gerencie as visitas agendadas</p>
     </div>
+    <a href="/visitas/novo" class="btn btn-aliadas-primario">
+      <i class="bi bi-plus-lg"></i> Nova Visita
+    </a>
   </div>
 
-<%- include('partials/footer') %>
+  <div class="content-card">
+    <% if (visitas && visitas.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table table-aliados">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Cliente</th>
+              <th>Imóvel</th>
+              <th>Observação</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% visitas.forEach(visita => { %>
+              <tr>
+                <td><%= formatarData(visita.data_visita) %></td>
+                <td><%= formatarHorario(visita.horario) %></td>
+                <td><%= visita.cliente_nome || '—' %></td>
+                <td><%= visita.imovel_endereco || '—' %></td>
+                <td><%= visita.observacao || '—' %></td>
+                <td>
+                  <span class="badge-status <%= visita.status === 'agendada' ? 'badge-verde' : visita.status === 'cancelada' ? 'badge-laranja' : 'badge-verde' %>">
+                    <%= visita.status %>
+                  </span>
+                </td>
+                <td>
+                  <a href="/visitas/<%= visita.id_visita %>/editar" class="btn-icon-action">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <form action="/visitas/<%= visita.id_visita %>/excluir" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-icon-action danger" onclick="return confirm('Tem certeza?')">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <p class="text-muted">Nenhuma visita cadastrada.</p>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
