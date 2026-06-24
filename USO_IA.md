@@ -1,6 +1,6 @@
-# 📊 Relatório de Uso de Inteligência Artificial
+# Relatório de Uso de Inteligência Artificial
 
-## 🤖 Ferramentas utilizadas
+## Ferramentas utilizadas
 
 - **DeepSeek (ChatGPT)** - Assistente principal para desenvolvimento e correção de erros
 - **GitHub Copilot** - Sugestões de código e autocompletar
@@ -8,7 +8,7 @@
 
 ---
 
-## 🎯 Principais finalidades
+## Principais finalidades
 
 ### 1. Geração e estruturação de código
 - Criação de Models, Controllers, Routes e Views seguindo o padrão MVC
@@ -31,7 +31,7 @@
 
 ---
 
-## 📝 Exemplos de prompts utilizados
+## Exemplos de prompts utilizados
 
 ### Prompt 1: Estrutura do projeto
 **Prompt:**
