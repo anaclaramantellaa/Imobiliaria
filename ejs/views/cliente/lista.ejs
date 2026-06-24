@@ -1,6 +1,14 @@
 <%- include('../partials/head') %>
 <%- include('../partials/navbar', { active: 'clientes' }) %>
 
+<%
+// Função pra arrumar o CPF
+function formatarCPF(cpf) {
+    if (!cpf || cpf.length !== 11) return cpf || '—';
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+}
+%>
+
   <div class="page-container">
     <div class="page-header">
       <div>
@@ -32,7 +40,7 @@
               <% clientes.forEach(cliente => { %>
                 <tr>
                   <td><%= cliente.nome %></td>
-                  <td><%= cliente.cpf %></td>
+                  <td><%= formatarCPF(cliente.cpf) %></td>
                   <td><%= cliente.email %></td>
                   <td><%= cliente.telefone %></td>
                   <td>
